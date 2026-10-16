@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café del Mar | Sabor Mediterráneo & Café de Especialidad</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome CDN para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Playfair Display para títulos, Plus Jakarta Sans para texto) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ocean: {
+                            50: '#f0f7fa',
+                            100: '#e0eff5',
+                            500: '#2b7a9e',
+                            700: '#1d546f',
+                            900: '#0f3142',
+                        },
+                        sand: {
+                            50: '#fdfbf7',
+                            100: '#f7f2e8',
+                            200: '#ede3d1',
+                            300: '#dccab0',
+                            800: '#5c4d3c',
+                        },
+                        wood: {
+                            500: '#a67c52',
+                            700: '#7a5735',
+                            800: '#523820',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-nav {
+            background: rgba(253, 251, 247, 0.85);
+            backdrop-filter: blur(12px);
+        }
+        .hero-overlay {
+            background: linear-gradient(180deg, rgba(15, 49, 66, 0.6) 0%, rgba(15, 49, 66, 0.75) 100%);
+        }
+    </style>
+</head>
+<body class="bg-sand-50 text-slate-800 font-sans antialiased selection:bg-ocean-500 selection:text-white">
+
+    <!-- Header / Nav -->
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 glass-nav border-b border-sand-200/50" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full bg-ocean-700 text-sand-50 flex items-center justify-center text-xl transition-transform group-hover:rotate-12 shadow-md">
+                    <i class="fa-solid font-light fa-compass text-amber-300"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-serif text-2xl font-bold tracking-wide text-ocean-900 group-hover:text-ocean-700 transition">Café del Mar</span>
+                    <span class="text-[10px] tracking-widest uppercase text-wood-500 -mt-1 font-semibold">Espresso & Brisa</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center space-x-8 font-medium text-slate-700 text-sm">
+                <a href="#inicio" class="hover:text-ocean-500 transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-ocean-500 hover:after:w-full after:transition-all">Inicio</a>
+                <a href="#menu" class="hover:text-ocean-500 transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-ocean-500 hover:after:w-full after:transition-all">Menú</a>
+                <a href="#nosotros" class="hover:text-ocean-500 transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-ocean-500 hover:after:w-full after:transition-all">Historia</a>
+                <a href="#horarios" class="hover:text-ocean-500 transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-ocean-500 hover:after:w-full after:transition-all">Horarios & Ubicación</a>
+            </nav>
+
+            <!-- CTA Button Navbar -->
+            <div class="hidden md:flex items-center gap-4">
+                <a href="#reservas" class="bg-ocean-700 hover:bg-ocean-900 text-sand-50 px-5 py-2.5 rounded-full text-sm font-semibold transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 flex items-center gap-2">
+                    <i class="fa-regular fa-calendar-check"></i>
+                    <span>Reservar Mesa</span>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 text-ocean-900 focus:outline-none" aria-label="Abrir Menú">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-sand-50 border-b border-sand-200 px-6 pt-2 pb-6 space-y-4">
+            <a href="#inicio" class="mobile-link block py-2 font-medium text-ocean-900 border-b border-sand-100">Inicio</a>
+            <a href="#menu" class="mobile-link block py-2 font-medium text-ocean-900 border-b border-sand-100">Menú</a>
+            <a href="#nosotros" class="mobile-link block py-2 font-medium text-ocean-900 border-b border-sand-100">Historia</a>
+            <a href="#horarios" class="mobile-link block py-2 font-medium text-ocean-900 border-b border-sand-100">Horarios & Ubicación</a>
+            <a href="#reservas" class="mobile-link w-full mt-2 bg-ocean-700 text-white text-center py-3 rounded-xl font-semibold flex items-center justify-center gap-2">
+                <i class="fa-regular fa-calendar-check"></i> Reservar Mesa
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1920&q=80" 
+                 alt="Interior de cafetería junto al mar" 
+                 class="w-full h-full object-cover"
+                 onerror="this.src='https://placehold.co/1920x1080/1d546f/ffffff?text=Cafe+del+Mar+Ambiente'">
+            <div class="absolute inset-0 hero-overlay"></div>
+        </div>
+
+        <div class="relative z-10 max-w-5xl mx-auto text-center px-4 sm:px-6 lg:px-8 py-20 text-white">
+            <span class="inline-block bg-sand-100/20 backdrop-blur-md text-amber-200 border border-amber-200/30 rounded-full px-4 py-1.5 text-xs sm:text-sm font-medium tracking-wider uppercase mb-6">
+                <i class="fa-solid fa-water mr-1.5"></i> Cafetería de Especialidad Frente al Mar
+            </span>
+            <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6">
+                El aroma del grano recién tostado con la brisa del Mediterráneo
+            </h1>
+            <p class="text-base sm:text-xl text-sand-100 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
+                Un rincón sereno diseñado para disfrutar del mejor café artesanal, repostería recién horneada y momentos inolvidables al ritmo de las olas.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#menu" class="w-full sm:w-auto bg-amber-600 hover:bg-amber-700 text-white px-8 py-4 rounded-full font-semibold transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-mug-hot"></i>
+                    <span>Ver Menú Completo</span>
+                </a>
+                <a href="#reservas" class="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white border border-white/30 backdrop-blur-md px-8 py-4 rounded-full font-semibold transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-anchor"></i>
+                    <span>Reservar Mesa</span>
+                </a>
+            </div>
+
+            <!-- Features Quick Badges -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 pt-10 border-t border-white/15 max-w-4xl mx-auto">
+                <div class="flex flex-col items-center">
+                    <i class="fa-solid fa-seedling text-amber-300 text-2xl mb-2"></i>
+                    <span class="text-xs uppercase tracking-wider font-semibold text-sand-100">Café 100% Orgánico</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <i class="fa-solid fa-bread-slice text-amber-300 text-2xl mb-2"></i>
+                    <span class="text-xs uppercase tracking-wider font-semibold text-sand-100">Pastelería del Día</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <i class="fa-solid fa-umbrella-beach text-amber-300 text-2xl mb-2"></i>
+                    <span class="text-xs uppercase tracking-wider font-semibold text-sand-100">Terraza Vista al Mar</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <i class="fa-solid fa-wifi text-amber-300 text-2xl mb-2"></i>
+                    <span class="text-xs uppercase tracking-wider font-semibold text-sand-100">Free Wi-Fi & Work Friendly</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-24 bg-sand-100/60 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-ocean-700 font-semibold tracking-wider uppercase text-xs sm:text-sm">Sabores Artesanales</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-ocean-900 mt-2 mb-4">Nuestro Menú</h2>
+                <div class="w-16 h-1 bg-amber-600 mx-auto rounded-full mb-6"></div>
+                <p class="text-slate-600 text-base sm:text-lg">
+                    Seleccionamos los mejores granos de café de origen ético y los combinamos con ingredientes frescos del Mediterráneo.
+                </p>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="flex justify-center mb-12 overflow-x-auto pb-2">
+                <div class="inline-flex bg-white p-1.5 rounded-2xl shadow-sm border border-sand-200 max-w-full">
+                    <button onclick="filterMenu('all')" class="menu-tab active px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 bg-ocean-700 text-white shadow-sm" data-category="all">
+                        Todos
+                    </button>
+                    <button onclick="filterMenu('calientes')" class="menu-tab px-5 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:text-ocean-900 transition-all duration-200" data-category="calientes">
+                        Cafés & Calientes
+                    </button>
+                    <button onclick="filterMenu('frias')" class="menu-tab px-5 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:text-ocean-900 transition-all duration-200" data-category="frias">
+                        Especiales de Mar (Frías)
+                    </button>
+                    <button onclick="filterMenu('reposteria')" class="menu-tab px-5 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:text-ocean-900 transition-all duration-200" data-category="reposteria">
+                        Repostería & Desayunos
+                    </button>
+                </div>
+            </div>
+
+            <!-- Menu Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="menu-container">
+                
+                <!-- Item 1 -->
+                <div class="menu-item bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-all border border-sand-200/80 flex flex-col justify-between" data-cat="calientes">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="font-serif text-xl font-bold text-ocean-900">Espresso Mediterráneo</h3>
+                            <span class="text-amber-700 font-bold text-lg bg-amber-50 px-3 py-1 rounded-full border border-amber-200">$3.20</span>
+                        </div>
+                        <p class="text-slate-600 text-sm mb-4">Mezcla exclusiva con notas a avellana tostada, cacao puro y un sutil toque de cáscara de naranja confitada.</p>
+                    </div>
+                    <div class="flex items-center gap-2 pt-3 border-t border-sand-100 text-xs text-ocean-700 font-medium">
+                        <span class="bg-ocean-50 px-2.5 py-1 rounded-md"><i class="fa-solid fa-fire-flame-curved mr-1"></i>Especialidad</span>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="menu-item bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-all border border-sand-200/80 flex flex-col justify-between" data-cat="calientes">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="font-serif text-xl font-bold text-ocean-900">Cappuccino Sal de Mar</h3>
+                            <span class="text-amber-700 font-bold text-lg bg-amber-50 px-3 py-1 rounded-full border border-amber-200">$4.50</span>
+                        </div>
+                        <p class="text-slate-600 text-sm mb-4">Espresso doble, leche cremada a la perfección y un toque final de caramelo salado con escamas de sal marina.</p>
+                    </div>
+                    <div class="flex items-center gap-2 pt-3 border-t border-sand-100 text-xs text-ocean-700 font-medium">
+                        <span class="bg-amber-100/80 text-amber-800 px-2.5 py-1 rounded-md"><i class="fa-solid fa-star mr-1"></i>Favorito</span>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="menu-item bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-all border border-sand-200/80 flex flex-col justify-between" data-cat="frias">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="font-serif text-xl font-bold text-ocean-900">Cold Brew Brisa Marina</h3>
+                            <span class="text-amber-700 font-bold text-lg bg-amber-50 px-3 py-1 rounded-full border border-amber-200">$4.80</span>
+                        </div>
+                        <p class="text-slate-600 text-sm mb-4">Café infusionado en frío durante 18 horas, servido sobre hielo, tónica premium y una rodaja de pomelo fresco.</p>
+                    </div>
+                    <div class="flex items-center gap-2 pt-3 border-t border-sand-100 text-xs text-ocean-700 font-medium">
+                        <span class="bg-ocean-50 px-2.5 py-1 rounded-md"><i class="fa-solid fa-snowflake mr-1"></i>Muy Refrescante</span>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="menu-item bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-all border border-sand-200/80 flex flex-col justify-between" data-cat="frias">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="font-serif text-xl font-bold text-ocean-900">Latte Helado Lavanda & Miel</h3>
+                            <span class="text-amber-700 font-bold text-lg bg-amber-50 px-3 py-1 rounded-full border border-amber-200">$5.20</span>
+                        </div>
+                        <p class="text-slate-600 text-sm mb-4">Espresso suave, leche vegetal a elección, jarabe artesanal de lavanda silvestre y miel local purificada.</p>
+                    </div>
+                    <div class="flex items-center gap-2 pt-3 border-t border-sand-100 text-xs text-ocean-700 font-medium">
+                        <span class="bg-purple-50 text-purple-700 px-2.5 py-1 rounded-md"><i class="fa-solid fa-leaf mr-1"></i>Artesanal</span>
+                    </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="menu-item bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-all border border-sand-200/80 flex flex-col justify-between" data-cat="reposteria">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="font-serif text-xl font-bold text-ocean-900">Tostada de Aguacate & Higo</h3>
+                            <span class="text-amber-700 font-bold text-lg bg-amber-50 px-3 py-1 rounded-full border border-amber-200">$7.90</span>
+                        </div>
+                        <p class="text-slate-600 text-sm mb-4">Pan de masa madre, aguacate cremoso, higos frescos, queso feta desmenuzado, nueces y reducción de balsámico.</p>
+                    </div>
+                    <div class="flex items-center gap-2 pt-3 border-t border-sand-100 text-xs text-ocean-700 font-medium">
+                        <span class="bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-md"><i class="fa-solid fa-seedling mr-1"></i>Opción Veggie</span>
+                    </div>
+                </div>
+
+                <!-- Item 6 -->
+                <div class="menu-item bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-all border border-sand-200/80 flex flex-col justify-between" data-cat="reposteria">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="font-serif text-xl font-bold text-ocean-900">Croissant Mantequilla & Almendras</h3>
+                            <span class="text-amber-700 font-bold text-lg bg-amber-50 px-3 py-1 rounded-full border border-amber-200">$3.80</span>
+                        </div>
+                        <p class="text-slate-600 text-sm mb-4">Croissant francés horneado cada mañana, rellenado con crema frangipane y cubierto de almendras tostadas.</p>
+                    </div>
+                    <div class="flex items-center gap-2 pt-3 border-t border-sand-100 text-xs text-ocean-700 font-medium">
+                        <span class="bg-amber-100/80 text-amber-800 px-2.5 py-1 rounded-md"><i class="fa-solid fa-bread-slice mr-1"></i>Recién Horneado</span>
+                    </div>
+                </div>
+
+                <!-- Item 7 -->
+                <div class="menu-item bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-all border border-sand-200/80 flex flex-col justify-between" data-cat="reposteria">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="font-serif text-xl font-bold text-ocean-900">Bowl Mediterráneo de Frutas</h3>
+                            <span class="text-amber-700 font-bold text-lg bg-amber-50 px-3 py-1 rounded-full border border-amber-200">$6.50</span>
+                        </div>
+                        <p class="text-slate-600 text-sm mb-4">Yogur griego cremoso, frutos rojos de estación, granola casera con semillas y un hilo de miel orgánica.</p>
+                    </div>
+                    <div class="flex items-center gap-2 pt-3 border-t border-sand-100 text-xs text-ocean-700 font-medium">
+                        <span class="bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-md"><i class="fa-solid fa-heart mr-1"></i>Saludable</span>
+                    </div>
+                </div>
+
+                <!-- Item 8 -->
+                <div class="menu-item bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-all border border-sand-200/80 flex flex-col justify-between" data-cat="frias">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="font-serif text-xl font-bold text-ocean-900">Smoothie Azul "Cielo de Mar"</h3>
+                            <span class="text-amber-700 font-bold text-lg bg-amber-50 px-3 py-1 rounded-full border border-amber-200">$5.80</span>
+                        </div>
+                        <p class="text-slate-600 text-sm mb-4">Plátano, piña, agua de coco, espirulina azul orgánica y topping de coco rallado con semillas de chía.</p>
+                    </div>
+                    <div class="flex items-center gap-2 pt-3 border-t border-sand-100 text-xs text-ocean-700 font-medium">
+                        <span class="bg-ocean-50 px-2.5 py-1 rounded-md"><i class="fa-solid fa-water mr-1"></i>Exclusivo</span>
+                    </div>
+                </div>
+
+                <!-- Item 9 -->
+                <div class="menu-item bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-all border border-sand-200/80 flex flex-col justify-between" data-cat="calientes">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="font-serif text-xl font-bold text-ocean-900">Flat White Canela & Nuez</h3>
+                            <span class="text-amber-700 font-bold text-lg bg-amber-50 px-3 py-1 rounded-full border border-amber-200">$4.20</span>
+                        </div>
+                        <p class="text-slate-600 text-sm mb-4">Doble shot de espresso Ristretto con capa fina de leche microcremada y toque de canela Ceilán molida.</p>
+                    </div>
+                    <div class="flex items-center gap-2 pt-3 border-t border-sand-100 text-xs text-ocean-700 font-medium">
+                        <span class="bg-amber-50 text-amber-800 px-2.5 py-1 rounded-md"><i class="fa-solid fa-mug-hot mr-1"></i>Equilibrado</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="nosotros" class="py-24 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                
+                <!-- Images Grid -->
+                <div class="relative">
+                    <div class="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-4 border-sand-50">
+                        <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=800&q=80" 
+                             alt="Barista preparando café espresso" 
+                             class="w-full h-[400px] sm:h-[480px] object-cover"
+                             onerror="this.src='https://placehold.co/800x600/1d546f/ffffff?text=Barista+Cafe'">
+                    </div>
+                    <!-- Secondary Small Image Overlay -->
+                    <div class="absolute -bottom-8 -right-4 sm:-right-8 z-20 w-1/2 rounded-2xl overflow-hidden shadow-xl border-4 border-white hidden sm:block">
+                        <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=600&q=80" 
+                             alt="Grano de café tostado" 
+                             class="w-full h-48 object-cover"
+                             onerror="this.src='https://placehold.co/600x400/a67c52/ffffff?text=Granos+de+Cafe'">
+                    </div>
+                    <!-- Nautical Decorative Badge -->
+                    <div class="absolute -top-6 -left-6 z-20 bg-sand-100 text-ocean-900 p-4 rounded-2xl shadow-lg border border-sand-200 hidden sm:flex items-center gap-3">
+                        <i class="fa-solid fa-anchor text-ocean-700 text-3xl"></i>
+                        <div>
+                            <p class="font-serif font-bold text-lg leading-none">Desde 2018</p>
+                            <p class="text-xs text-slate-500">Junto al Paseo Marítimo</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="space-y-6">
+                    <span class="text-ocean-700 font-semibold tracking-wider uppercase text-xs sm:text-sm">Nuestra Esencia</span>
+                    <h2 class="font-serif text-3xl sm:text-5xl font-bold text-ocean-900 leading-tight">
+                        Un refugio costero donde el tiempo se detiene
+                    </h2>
+                    <p class="text-slate-600 text-base sm:text-lg leading-relaxed">
+                        Nacimos con la visión de fusionar la cultura del café de especialidad con la paz inigualable del mar Mediterráneo. En <strong>Café del Mar</strong>, cada taza cuenta una historia de origen, tostado artesanal y pasión por los detalles.
+                    </p>
+                    <p class="text-slate-600 text-base sm:text-lg leading-relaxed">
+                        Trabajamos directamente con pequeños caficultores sostenibles, asegurando un comercio justo y granos de la más alta calidad. Nuestro espacio está pensado para ser tu pausa en el día, ya sea para iniciar la mañana o ver el atardecer.
+                    </p>
+
+                    <!-- Features list -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                        <div class="flex items-start gap-3">
+                            <div class="p-2 bg-ocean-50 text-ocean-700 rounded-lg shrink-0">
+                                <i class="fa-solid fa-check text-base"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-ocean-900 text-sm">Tostado Local</h4>
+                                <p class="text-slate-500 text-xs">Lotes pequeños horneados semanalmente.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="p-2 bg-ocean-50 text-ocean-700 rounded-lg shrink-0">
+                                <i class="fa-solid fa-check text-base"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-ocean-900 text-sm">Ingredientes Locales</h4>
+                                <p class="text-slate-500 text-xs">Frutas frescas y pan artesanal del día.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 border-t border-sand-200">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-sand-200 flex items-center justify-center font-serif font-bold text-ocean-900 text-xl">
+                                CM
+                            </div>
+                            <div>
+                                <p class="font-serif font-bold text-ocean-900">Mateo & Sofía Valdés</p>
+                                <p class="text-xs text-slate-500">Fundadores & Maestros Baristas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Hours & Location Section -->
+    <section id="horarios" class="py-24 bg-sand-100/80 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-ocean-700 font-semibold tracking-wider uppercase text-xs sm:text-sm">Visítanos</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-ocean-900 mt-2 mb-4">Horarios & Ubicación</h2>
+                <div class="w-16 h-1 bg-amber-600 mx-auto rounded-full mb-6"></div>
+                <p class="text-slate-600 text-base sm:text-lg">
+                    Estamos esperándote frente al mar para ofrecerte la mejor experiencia.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- Hours Card -->
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-sand-200 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-ocean-50 text-ocean-700 flex items-center justify-center text-xl mb-6">
+                            <i class="fa-regular fa-clock"></i>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-ocean-900 mb-6">Horario de Atención</h3>
+                        
+                        <div class="space-y-4 text-sm">
+                            <div class="flex justify-between items-center pb-3 border-b border-sand-100">
+                                <span class="font-medium text-slate-700">Lunes - Jueves</span>
+                                <span class="text-ocean-700 font-bold">07:30 - 20:00</span>
+                            </div>
+                            <div class="flex justify-between items-center pb-3 border-b border-sand-100">
+                                <span class="font-medium text-slate-700">Viernes - Sábado</span>
+                                <span class="text-ocean-700 font-bold">07:30 - 22:00</span>
+                            </div>
+                            <div class="flex justify-between items-center pb-3 border-b border-sand-100">
+                                <span class="font-medium text-slate-700">Domingo</span>
+                                <span class="text-ocean-700 font-bold">08:00 - 21:00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-6 bg-sand-50 rounded-2xl p-4 border border-sand-200/60">
+                        <p class="text-xs text-slate-600 flex items-center gap-2">
+                            <i class="fa-solid fa-circle-info text-amber-600"></i>
+                            <span>Cozina y cocina de autor abiertas hasta 1 hora antes del cierre.</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Location Details Card -->
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-sand-200 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-700 flex items-center justify-center text-xl mb-6">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-ocean-900 mb-6">Encuéntranos</h3>
+                        
+                        <div class="space-y-4 text-sm text-slate-600">
+                            <p class="flex items-start gap-3">
+                                <i class="fa-solid fa-map-pin text-ocean-700 mt-1"></i>
+                                <span><strong>Paseo Marítimo del Sol, 42</strong><br>28001, Costa del Mar, España</span>
+                            </p>
+                            <p class="flex items-center gap-3">
+                                <i class="fa-solid fa-phone text-ocean-700"></i>
+                                <span>+34 912 345 678</span>
+                            </p>
+                            <p class="flex items-center gap-3">
+                                <i class="fa-solid fa-envelope text-ocean-700"></i>
+                                <span>hola@cafedelmar.com</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 space-y-3">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Servicios disponibles</span>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-sand-100 text-slate-700 text-xs font-medium px-3 py-1.5 rounded-lg"><i class="fa-solid fa-dog mr-1"></i>Pet Friendly</span>
+                            <span class="bg-sand-100 text-slate-700 text-xs font-medium px-3 py-1.5 rounded-lg"><i class="fa-solid fa-parking mr-1"></i>Parking Cerca</span>
+                            <span class="bg-sand-100 text-slate-700 text-xs font-medium px-3 py-1.5 rounded-lg"><i class="fa-solid fa-chair mr-1"></i>Terraza Exterior</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visual Interactive Map Card -->
+                <div class="bg-ocean-900 rounded-3xl p-8 text-white shadow-md flex flex-col justify-between relative overflow-hidden group">
+                    <!-- Map Graphic Background simulation -->
+                    <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                    
+                    <div class="relative z-10">
+                        <span class="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">
+                            Vistas al Mar
+                        </span>
+                        <h3 class="font-serif text-2xl font-bold mt-4 mb-2">Frente al Puerto Deportivo</h3>
+                        <p class="text-sand-200 text-sm font-light">
+                            A tan solo 2 minutos a pie del muelle principal y con acceso directo a la playa.
+                        </p>
+                    </div>
+
+                    <!-- Visual Stylized Map Box -->
+                    <div class="relative z-10 my-6 bg-ocean-700/60 backdrop-blur-md rounded-2xl p-6 border border-white/10 text-center">
+                        <div class="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg animate-bounce">
+                            <i class="fa-solid fa-mug-saucer text-white text-lg"></i>
+                        </div>
+                        <p class="font-serif font-bold text-sm">Café del Mar</p>
+                        <p class="text-xs text-sand-200">Primera línea de playa</p>
+                    </div>
+
+                    <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="relative z-10 w-full bg-white text-ocean-900 hover:bg-sand-100 py-3 rounded-xl font-semibold text-sm transition-all text-center flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-compass"></i>
+                        <span>Abrir en Google Maps</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation & Contact Section -->
+    <section id="reservas" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto bg-sand-50 rounded-3xl border border-sand-200 p-8 sm:p-12 shadow-xl relative overflow-hidden">
+                
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <span class="text-ocean-700 font-semibold tracking-wider uppercase text-xs sm:text-sm">Reserva tu experiencia</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-ocean-900 mt-2 mb-3">Reserva una Mesa o Contáctanos</h2>
+                    <p class="text-slate-600 text-sm sm:text-base">
+                        ¿Tienes una reunión especial o quieres asegurar tu mesa frente al mar? Completa el formulario y te confirmaremos de inmediato.
+                    </p>
+                </div>
+
+                <!-- Form -->
+                <form id="booking-form" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <!-- Nombre -->
+                        <div>
+                            <label for="name" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Nombre Completo</label>
+                            <input type="text" id="name" required placeholder="Ej. Ana Martínez" class="w-full px-4 py-3 rounded-xl border border-sand-300 focus:outline-none focus:ring-2 focus:ring-ocean-500 bg-white text-slate-800 text-sm transition">
+                        </div>
+
+                        <!-- Correo -->
+                        <div>
+                            <label for="email" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Correo Electrónico</label>
+                            <input type="email" id="email" required placeholder="tu@email.com" class="w-full px-4 py-3 rounded-xl border border-sand-300 focus:outline-none focus:ring-2 focus:ring-ocean-500 bg-white text-slate-800 text-sm transition">
+                        </div>
+
+                        <!-- Teléfono -->
+                        <div>
+                            <label for="phone" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Teléfono</label>
+                            <input type="tel" id="phone" required placeholder="+34 600 000 000" class="w-full px-4 py-3 rounded-xl border border-sand-300 focus:outline-none focus:ring-2 focus:ring-ocean-500 bg-white text-slate-800 text-sm transition">
+                        </div>
+
+                        <!-- Personas -->
+                        <div>
+                            <label for="guests" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Nº de Personas</label>
+                            <select id="guests" class="w-full px-4 py-3 rounded-xl border border-sand-300 focus:outline-none focus:ring-2 focus:ring-ocean-500 bg-white text-slate-800 text-sm transition">
+                                <option value="1">1 Persona</option>
+                                <option value="2" selected>2 Personas</option>
+                                <option value="3">3 Personas</option>
+                                <option value="4">4 Personas</option>
+                                <option value="5+">5+ Personas (Grupo)</option>
+                            </select>
+                        </div>
+
+                        <!-- Fecha -->
+                        <div>
+                            <label for="date" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Fecha</label>
+                            <input type="date" id="date" required class="w-full px-4 py-3 rounded-xl border border-sand-300 focus:outline-none focus:ring-2 focus:ring-ocean-500 bg-white text-slate-800 text-sm transition">
+                        </div>
+
+                        <!-- Hora -->
+                        <div>
+                            <label for="time" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Hora Aproximada</label>
+                            <input type="time" id="time" required class="w-full px-4 py-3 rounded-xl border border-sand-300 focus:outline-none focus:ring-2 focus:ring-ocean-500 bg-white text-slate-800 text-sm transition">
+                        </div>
+                    </div>
+
+                    <!-- Mensaje / Notas adicionales -->
+                    <div>
+                        <label for="message" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Mensaje o Petición Especial</label>
+                        <textarea id="message" rows="3" placeholder="Ej. Prefeible mesa en terraza vista al mar, alergias alimentarias..." class="w-full px-4 py-3 rounded-xl border border-sand-300 focus:outline-none focus:ring-2 focus:ring-ocean-500 bg-white text-slate-800 text-sm transition"></textarea>
+                    </div>
+
+                    <!-- Botón Enviar -->
+                    <div class="text-center pt-2">
+                        <button type="submit" class="w-full sm:w-auto bg-ocean-700 hover:bg-ocean-900 text-white font-semibold px-10 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 inline-flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Confirmar Reserva</span>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Feedback Message Container -->
+                <div id="form-feedback" class="hidden mt-6 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-center font-medium text-sm">
+                    <i class="fa-solid fa-circle-check text-emerald-600 text-lg mr-2"></i>
+                    ¡Gracias! Tu solicitud de reserva ha sido enviada. Te contactaremos pronto para confirmar.
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-ocean-900 text-white pt-16 pb-12 border-t border-ocean-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+                
+                <!-- Col 1: Brand Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-ocean-700 text-sand-50 flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-compass text-amber-300"></i>
+                        </div>
+                        <span class="font-serif text-2xl font-bold tracking-wide">Café del Mar</span>
+                    </div>
+                    <p class="text-sand-200/80 text-sm leading-relaxed font-light">
+                        Tu espacio de desconexión y café artesanal frente a la brisa del Mediterráneo.
+                    </p>
+                    <!-- Social icons -->
+                    <div class="flex space-x-3 pt-2">
+                        <a href="#" class="w-9 h-9 rounded-full bg-ocean-700/60 hover:bg-amber-600 flex items-center justify-center transition-colors" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram text-sm"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-ocean-700/60 hover:bg-amber-600 flex items-center justify-center transition-colors" aria-label="Facebook">
+                            <i class="fa-brands fa-facebook-f text-sm"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-ocean-700/60 hover:bg-amber-600 flex items-center justify-center transition-colors" aria-label="TripAdvisor">
+                            <i class="fa-brands fa-tripadvisor text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Quick Links -->
+                <div>
+                    <h4 class="font-serif text-lg font-bold mb-4 text-amber-200">Enlaces Rápidos</h4>
+                    <ul class="space-y-2.5 text-sm text-sand-200/80">
+                        <li><a href="#inicio" class="hover:text-white transition-colors">Inicio</a></li>
+                        <li><a href="#menu" class="hover:text-white transition-colors">Nuestros Productos</a></li>
+                        <li><a href="#nosotros" class="hover:text-white transition-colors">Nuestra Historia</a></li>
+                        <li><a href="#horarios" class="hover:text-white transition-colors">Horarios y Mapa</a></li>
+                        <li><a href="#reservas" class="hover:text-white transition-colors">Reservar Mesa</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Contact Info -->
+                <div>
+                    <h4 class="font-serif text-lg font-bold mb-4 text-amber-200">Contacto Directo</h4>
+                    <ul class="space-y-3 text-sm text-sand-200/80">
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-location-dot text-amber-400"></i>
+                            <span>Paseo Marítimo del Sol, 42</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-phone text-amber-400"></i>
+                            <span>+34 912 345 678</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-envelope text-amber-400"></i>
+                            <span>hola@cafedelmar.com</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Newsletter -->
+                <div>
+                    <h4 class="font-serif text-lg font-bold mb-4 text-amber-200">Club del Café</h4>
+                    <p class="text-sand-200/80 text-xs mb-4">
+                        Subscríbete para recibir invitaciones a catas privadas e historias sobre nuestras selecciones de origen.
+                    </p>
+                    <form onsubmit="event.preventDefault(); this.reset();" class="flex gap-2">
+                        <input type="email" placeholder="Tu correo" required class="bg-ocean-800 border border-ocean-700 text-white placeholder-slate-400 text-xs rounded-lg px-3 py-2 w-full focus:outline-none focus:border-amber-400">
+                        <button type="submit" class="bg-amber-600 hover:bg-amber-500 text-white px-3 py-2 rounded-lg text-xs font-semibold transition">Unirme</button>
+                    </form>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright -->
+            <div class="pt-8 border-t border-ocean-800 text-center text-xs text-sand-200/50 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p>&copy; <span id="year"></span> Café del Mar. Todos los derechos reservados.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:underline">Aviso Legal</a>
+                    <a href="#" class="hover:underline">Política de Privacidad</a>
+                    <a href="#" class="hover:underline">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript logic -->
+    <script>
+        // Automatic Year update
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile Menu Toggle logic
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on clicking links
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Interactive Menu Filtering logic
+        function filterMenu(category) {
+            const tabs = document.querySelectorAll('.menu-tab');
+            const items = document.querySelectorAll('.menu-item');
+
+            // Toggle Tab styling
+            tabs.forEach(tab => {
+                if (tab.getAttribute('data-category') === category) {
+                    tab.classList.add('bg-ocean-700', 'text-white', 'shadow-sm');
+                    tab.classList.remove('text-slate-600');
+                } else {
+                    tab.classList.remove('bg-ocean-700', 'text-white', 'shadow-sm');
+                    tab.classList.add('text-slate-600');
+                }
+            });
+
+            // Show/Hide items with smooth fade effect
+            items.forEach(item => {
+                const itemCat = item.getAttribute('data-cat');
+                if (category === 'all' || itemCat === category) {
+                    item.style.display = 'flex';
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'scale(1)';
+                    }, 50);
+                } else {
+                    item.style.opacity = '0';
+                    item.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        item.style.display = 'none';
+                    }, 200);
+                }
+            });
+        }
+
+        // Reservation Form Handling
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const feedback = document.getElementById('form-feedback');
+            const form = document.getElementById('booking-form');
+            
+            // Show custom feedback banner
+            feedback.classList.remove('hidden');
+            form.reset();
+
+            // Scroll to feedback message smoothly
+            feedback.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            // Hide feedback after 6 seconds
+            setTimeout(() => {
+                feedback.classList.add('hidden');
+            }, 6000);
+        }
+
+        // Set default minimum date in reservation form to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('date').setAttribute('min', today);
+    </script>
+</body>
+</html>
